@@ -1,5 +1,7 @@
 # mifos-gazelle-demo-runtime
 
+[![CI](https://github.com/openMF/mifos-gazelle-demo-runtime/actions/workflows/ci.yml/badge.svg)](https://github.com/openMF/mifos-gazelle-demo-runtime/actions/workflows/ci.yml)
+
 This repo contains the runtime environment for Mifo Gazelle Demos. This is currently WIP.
 
 branch main - is release/stable code
