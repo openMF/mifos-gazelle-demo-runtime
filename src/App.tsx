@@ -1,4 +1,5 @@
 import { ProductCard } from "./components/Cards/product-card";
+import { products } from "./data/productCardData";
 
 const App = () => {
 
