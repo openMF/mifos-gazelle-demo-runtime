@@ -1,5 +1,6 @@
 import React from 'react';
 import { Button } from '../ui/button';
+import { useNavigate } from 'react-router-dom';
 
 interface ProductCardProps {
   title: string;
@@ -12,10 +13,16 @@ interface ProductCardProps {
 export const ProductCard: React.FC<ProductCardProps> = ({ 
   title = "MifosX",
   description = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor",
-  onDemoClick = () => console.log('Demo clicked')
+  
 }) => {
+  const navigate = useNavigate();
+
+  const handleDemoButtonClick = ()=>{
+    navigate(`/demos/${title.toLowerCase()}`);
+  }
   return (
-    <div className="bg-white dark:bg-gray-800 rounded-xl overflow-hidden w-80 border border-gray-200 dark:border-gray-700 transition-all duration-300 hover:shadow-xl hover:shadow-blue-200 dark:hover:shadow-blue-900/30 hover:-translate-y-0.15">
+    <div className="bg-white dark:bg-gray-800 rounded-xl overflow-hidden w-80 border border-gray-200
+     dark:border-gray-700 transition-all duration-300 hover:shadow-xl hover:shadow-blue-200 dark:hover:shadow-blue-900/30 hover:-translate-y-0.15">
       <div className="bg-blue-50 dark:bg-blue-900/30 px-6 py-4">
         <div className="flex items-center">
           <div className="w-8 h-8 bg-blue-200 dark:bg-blue-800 rounded-lg flex items-center justify-center mr-3">
@@ -35,7 +42,8 @@ export const ProductCard: React.FC<ProductCardProps> = ({
               <div className="absolute -bottom-1 left-1/2 transform -translate-x-1/2 w-2 h-2 bg-gray-400 dark:bg-gray-600"></div>
               <div className="absolute -left-1 top-1/2 transform -translate-y-1/2 w-2 h-2 bg-gray-400 dark:bg-gray-600"></div>
               <div className="absolute -right-1 top-1/2 transform -translate-y-1/2 w-2 h-2 bg-gray-400 dark:bg-gray-600"></div>
-              <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-3 h-3 bg-blue-50 dark:bg-blue-900/30 rounded-full"></div>
+              <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-3 h-3 bg-blue-50
+               dark:bg-blue-900/30 rounded-full"></div>
             </div>
           </div>
           
@@ -54,8 +62,8 @@ export const ProductCard: React.FC<ProductCardProps> = ({
         
         <div className="flex justify-end">
           <Button 
-            onClick={onDemoClick}
             className="bg-blue-400 hover:bg-blue-500 dark:bg-blue-600 dark:hover:bg-blue-700 text-white text-sm px-6 py-2.5 rounded-full font-medium transition-colors duration-200 shadow-sm hover:shadow-md cursor-pointer"
+            onClick={handleDemoButtonClick}
           >
             Demo
           </Button>
