@@ -54,7 +54,7 @@ export default function MifosXDemos() {
     return (
       <div className="p-8 min-h-screen flex flex-col items-center gap-8 bg-gray-50 dark:bg-gray-900">
         <h1 className="text-xl font-semibold text-gray-800 dark:text-gray-100 mb-8 text-center">
-          Explore guided walkthroughs of key flows in the MifosX application.
+          Explore guided walkthroughs of key flows in the VNEXT application.
         </h1>
   
         <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700 overflow-hidden w-4/5">
@@ -139,27 +139,6 @@ export default function MifosXDemos() {
                 <ChevronLeft className="h-4 w-4" />
               </Button>
   
-              {/* <div className="flex items-center gap-1">
-                {Array.from({ length: table.getPageCount() }, (_, i) => (
-                  <Button
-                    key={i}
-                    variant={
-                      table.getState().pagination.pageIndex === i
-                        ? "default"
-                        : "outline"
-                    }
-                    size="sm"
-                    onClick={() => table.setPageIndex(i)}
-                    className={`w-8 h-8 p-0 text-sm ${
-                      table.getState().pagination.pageIndex === i
-                        ? "bg-blue-500 text-white hover:bg-blue-600"
-                        : "text-gray-800 dark:text-gray-100 hover:bg-gray-100 dark:hover:bg-gray-700"
-                    }`}
-                  >
-                    {i + 1}
-                  </Button>
-                ))}
-              </div> */}
   
               <Button
                 variant="outline"

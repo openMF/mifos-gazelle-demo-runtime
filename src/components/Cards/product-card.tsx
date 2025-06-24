@@ -18,7 +18,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({
   const navigate = useNavigate();
 
   const handleDemoButtonClick = ()=>{
-    navigate(`/demos/${title.toLowerCase()}`);
+    navigate(`/demo-list/${title.toLowerCase()}`);
   }
   return (
     <div className="bg-white dark:bg-gray-800 rounded-xl overflow-hidden w-80 border border-gray-200
