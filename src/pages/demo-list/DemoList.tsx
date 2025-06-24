@@ -3,8 +3,8 @@ import { useParams } from "react-router-dom";
 
 const demoComponentMap: Record<string, React.LazyExoticComponent<React.FC>> = {
   mifosx: lazy(() => import("./mifosx")),
-  // phee: lazy(() => import("./phee")),
-  // vnext: lazy(() => import("./vnext")),
+  phee: lazy(() => import("./phee")),
+  vnext: lazy(() => import("./vnext")),
 };
 
 export const DemoList = () => {
