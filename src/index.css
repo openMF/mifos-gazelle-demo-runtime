@@ -118,3 +118,25 @@
     @apply bg-background text-foreground;
   }
 }
+
+.think-blue-scrollbar {
+  scrollbar-width: thin;
+  scrollbar-color: #146fc4 #e0f0ff;
+}
+
+.think-blue-scrollbar::-webkit-scrollbar {
+  width: 6px;
+}
+
+.think-blue-scrollbar::-webkit-scrollbar-track {
+  background: #e0f0ff;
+}
+
+.think-blue-scrollbar::-webkit-scrollbar-thumb {
+  background-color: #003b73;
+  border-radius: 10px;
+}
+
+.think-blue-scrollbar::-webkit-scrollbar-thumb:hover {
+  background-color: #0056a3;
+}
