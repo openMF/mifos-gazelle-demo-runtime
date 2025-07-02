@@ -23,7 +23,7 @@ createRoot(document.getElementById("root")!).render(
             <div className="flex-grow">
               <App />
             </div>
-            <Footer />
+            {/* <Footer /> */}
           </div>
         </div>
       </ThemeProvider>
