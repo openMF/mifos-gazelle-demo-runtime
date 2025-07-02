@@ -5,7 +5,6 @@ import App from "./App.tsx";
 import { SideNav } from "./components/Navigation/SideNav.tsx";
 import { TopNav } from "./components/Navigation/TopNav.tsx";
 import { ThemeProvider } from "./context/ThemeContext";
-import { Footer } from "./components/Footer/footer.tsx";
 import { BrowserRouter } from "react-router-dom";
 
 createRoot(document.getElementById("root")!).render(
@@ -23,7 +22,6 @@ createRoot(document.getElementById("root")!).render(
             <div className="flex-grow">
               <App />
             </div>
-            {/* <Footer /> */}
           </div>
         </div>
       </ThemeProvider>
