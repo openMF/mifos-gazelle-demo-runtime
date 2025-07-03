@@ -1,13 +1,16 @@
 import { useState } from 'react';
-import { ChevronLeft, ChevronRight, RotateCcw, ExternalLink } from 'lucide-react';
+import {
+  ChevronLeft,
+  ChevronRight,
+  RotateCcw,
+  ExternalLink,
+} from 'lucide-react';
 import { SampleDemoJsonFile } from '@/data/sampleDemoFile';
 import { Button } from '@/components/ui/button';
 
-
-
-export const DemoPage=()=> {
+export const DemoPage = () => {
   const [currentStep, setCurrentStep] = useState(0);
-  const [iframeUrl, setIframeUrl] = useState("https://sandbox.mifos.community");
+  const [iframeUrl, setIframeUrl] = useState('https://sandbox.mifos.community');
 
   const totalSteps = SampleDemoJsonFile.steps.length;
   const currentStepData = SampleDemoJsonFile.steps[currentStep];
@@ -34,7 +37,7 @@ export const DemoPage=()=> {
     }
   };
 
-  const handleStepClick = (stepIndex:number) => {
+  const handleStepClick = (stepIndex: number) => {
     setCurrentStep(stepIndex);
     const step = SampleDemoJsonFile.steps[stepIndex];
     if (step?.url) {
@@ -44,7 +47,7 @@ export const DemoPage=()=> {
 
   const handleReset = () => {
     setCurrentStep(0);
-    setIframeUrl("https://sandbox.mifos.community");
+    setIframeUrl('https://sandbox.mifos.community');
   };
 
   return (
@@ -73,10 +76,12 @@ export const DemoPage=()=> {
           <div className="mb-6">
             <div className="flex justify-between text-sm text-gray-500 dark:text-white mb-2">
               <span>Progress</span>
-              <span>{currentStep + 1} of {totalSteps}</span>
+              <span>
+                {currentStep + 1} of {totalSteps}
+              </span>
             </div>
             <div className="w-full bg-gray-200 dark:bg-gray-800 rounded-full h-2">
-              <div 
+              <div
                 className="bg-blue-600 dark:bg-blue-400 h-2 rounded-full transition-all duration-300"
                 style={{ width: `${((currentStep + 1) / totalSteps) * 100}%` }}
               ></div>
@@ -93,9 +98,9 @@ export const DemoPage=()=> {
               </p>
               {currentStepData?.url && (
                 <div className="mt-3">
-                  <a 
-                    href={currentStepData.url} 
-                    target="_blank" 
+                  <a
+                    href={currentStepData.url}
+                    target="_blank"
                     rel="noopener noreferrer"
                     className="inline-flex items-center gap-1 text-blue-600 hover:text-blue-800 dark:text-blue-400 text-sm"
                   >
@@ -126,8 +131,11 @@ export const DemoPage=()=> {
           </div>
 
           <div className="mb-6 my-2">
+            <h4 className="font-medium text-gray-700 dark:text-gray-400 mb-3">
+              All Steps:
+            </h4>
             <h4 className="font-medium text-gray-700 dark:text-gray-400 mb-3">All Steps:</h4>
-            <div className="space-y-2 overflow-y-auto h-[200px] p-2">
+            <div className="space-y-2 overflow-y-auto h-[400px] p-2">
               {SampleDemoJsonFile.steps.map((step, index) => (
                 <button
                   key={index}
@@ -139,26 +147,28 @@ export const DemoPage=()=> {
                   }`}
                 >
                   <div className="flex items-center gap-3">
-                    <div className={`w-6 h-6 rounded-full flex items-center justify-center text-xs font-medium min-w-6 min-h-6 ${
-                      index === currentStep 
-                        ? 'bg-blue-600 dark:bg-blue-400 text-white' 
-                        : index < currentStep 
-                        ? 'bg-green-500 dark:bg-green-700 text-white' 
-                        : 'bg-gray-300 dark:bg-blue-300 text-gray-600'
-                    }`}>
+                    <div
+                      className={`w-6 h-6 rounded-full flex items-center justify-center text-xs font-medium min-w-6 min-h-6 ${
+                        index === currentStep
+                          ? 'bg-blue-600 dark:bg-blue-400 text-white'
+                          : index < currentStep
+                            ? 'bg-green-500 dark:bg-green-700 text-white'
+                            : 'bg-gray-300 dark:bg-blue-300 text-gray-600'
+                      }`}
+                    >
                       {index < currentStep ? '✓' : index + 1}
                     </div>
                     <div>
                       <div className="font-medium text-sm">{step.title}</div>
-                      <div className="text-xs text-gray-500 mt-1 line-clamp-2">{step.description}</div>
+                      <div className="text-xs text-gray-500 mt-1 line-clamp-2">
+                        {step.description}
+                      </div>
                     </div>
                   </div>
                 </button>
               ))}
             </div>
           </div>
-
-          
         </div>
       </div>
 
@@ -171,7 +181,9 @@ export const DemoPage=()=> {
                 <div className="w-3 h-3 bg-yellow-500 rounded-full"></div>
                 <div className="w-3 h-3 bg-green-500 rounded-full"></div>
               </div>
-              <span className="text-sm text-gray-600 font-mono truncate">{iframeUrl}</span>
+              <span className="text-sm text-gray-600 font-mono truncate">
+                {iframeUrl}
+              </span>
             </div>
             <button
               onClick={() => setIframeUrl(iframeUrl)}
@@ -194,4 +206,4 @@ export const DemoPage=()=> {
       </div>
     </div>
   );
-}
+};
