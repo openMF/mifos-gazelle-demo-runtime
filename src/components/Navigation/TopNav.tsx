@@ -1,5 +1,5 @@
-import { MoonIcon, SunIcon } from "lucide-react";
-import { useTheme } from "../../context/ThemeContext";
+import { MoonIcon, SunIcon } from 'lucide-react';
+import { useTheme } from '../../context/ThemeContext';
 
 export const TopNav = ({ title }: { title: string }) => {
   const { theme, toggleTheme } = useTheme();
@@ -9,7 +9,11 @@ export const TopNav = ({ title }: { title: string }) => {
       <div className="text-white text-xl font-semibold text-center">
         {title}
       </div>
-      <button onClick={toggleTheme} className="text-white cursor-pointer" title="Toggle theme">
+      <button
+        onClick={toggleTheme}
+        className="text-white cursor-pointer"
+        title="Toggle theme"
+      >
         {theme === 'light' ? <MoonIcon /> : <SunIcon />}
       </button>
     </div>
