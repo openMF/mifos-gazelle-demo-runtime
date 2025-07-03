@@ -58,6 +58,7 @@ export default function MifosXDemos() {
             <Button
               className="bg-blue-500 text-white px-3 py-1 rounded text-sm hover:bg-blue-600 cursor-pointer"
               onClick={() => NavigateToDemo(id, demoName)}
+              title="Start this demo"
             >
               Start Demo
             </Button>
@@ -155,6 +156,7 @@ export default function MifosXDemos() {
               onClick={() => table.setPageIndex(0)}
               disabled={!table.getCanPreviousPage()}
               className="p-2 disabled:opacity-50 disabled:cursor-not-allowed"
+              title="First page"
             >
               <ChevronsLeft className="h-4 w-4" />
             </Button>
@@ -165,6 +167,7 @@ export default function MifosXDemos() {
               onClick={() => table.previousPage()}
               disabled={!table.getCanPreviousPage()}
               className="p-2 disabled:opacity-50 disabled:cursor-not-allowed"
+              title="Previous page"
             >
               <ChevronLeft className="h-4 w-4" />
             </Button>
@@ -175,6 +178,7 @@ export default function MifosXDemos() {
               onClick={() => table.nextPage()}
               disabled={!table.getCanNextPage()}
               className="p-2 disabled:opacity-50 disabled:cursor-not-allowed"
+              title="Next page"
             >
               <ChevronRight className="h-4 w-4" />
             </Button>
@@ -185,6 +189,7 @@ export default function MifosXDemos() {
               onClick={() => table.setPageIndex(table.getPageCount() - 1)}
               disabled={!table.getCanNextPage()}
               className="p-2 disabled:opacity-50 disabled:cursor-not-allowed"
+              title="Last page"
             >
               <ChevronsRight className="h-4 w-4" />
             </Button>
