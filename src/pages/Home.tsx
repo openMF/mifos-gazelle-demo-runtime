@@ -53,6 +53,7 @@ export const Home = () => {
             <a
               href="#demos"
               className="inline-block px-8 py-3 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-lg shadow transition-all text-lg"
+              title="Scroll to demos section"
             >
               View Demos
             </a>
