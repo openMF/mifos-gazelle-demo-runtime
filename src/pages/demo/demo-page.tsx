@@ -127,7 +127,7 @@ export const DemoPage=()=> {
 
           <div className="mb-6 my-2">
             <h4 className="font-medium text-gray-700 dark:text-gray-400 mb-3">All Steps:</h4>
-            <div className="space-y-2 overflow-y-auto h-[200px] p-2">
+            <div className="space-y-2 overflow-y-auto h-[400px] p-2">
               {SampleDemoJsonFile.steps.map((step, index) => (
                 <button
                   key={index}
