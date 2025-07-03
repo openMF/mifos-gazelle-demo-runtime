@@ -2,9 +2,11 @@ name: Lint and Format Check
 
 on:
   pull_request:
-    branches: [main]
+    branches:
+      - dev
   push:
-    branches: [main]
+    branches:
+      - dev
 
 jobs:
   lint-format:
