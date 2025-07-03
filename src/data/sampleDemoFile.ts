@@ -5,7 +5,7 @@ export const SampleDemoJsonFile = {
     {
         title: "Login to MifosX",
         url:"https://sandbox.mifos.community",
-        description: "Enter the sample credentials to login to MifosX, username: mifos, paswword: password",
+        description: "Enter the sample credentials to login to MifosX, username: mifos, password: password",
 
     },
     {
