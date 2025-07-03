@@ -6,18 +6,18 @@ import {
   getFilteredRowModel,
   useReactTable,
   type CellContext,
-} from "@tanstack/react-table";
-import { useMemo, useState } from "react";
-import { DemoSampleData } from "@/data/DemoTableSampleData";
-import { Button } from "@/components/ui/button";
+} from '@tanstack/react-table';
+import { useMemo, useState } from 'react';
+import { DemoSampleData } from '@/data/DemoTableSampleData';
+import { Button } from '@/components/ui/button';
 import {
   ChevronLeft,
   ChevronRight,
   ChevronsLeft,
   ChevronsRight,
-} from "lucide-react";
-import { useNavigate } from "react-router-dom";
-import slugify from "slugify";
+} from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
+import slugify from 'slugify';
 
 interface DemoData {
   id: string;
@@ -33,24 +33,24 @@ export default function MifosXDemos() {
     const demoSlug = slugify(demoName, { lower: true });
     navigate(`/demo/${id}/${demoSlug}`);
   };
-  const [globalFilter, setGlobalFilter] = useState("");
+  const [globalFilter, setGlobalFilter] = useState('');
   const data = useMemo(() => [...DemoSampleData], []);
 
   const columns = useMemo(
     () => [
-      columnHelper.accessor("name", {
-        header: "Demo Name",
+      columnHelper.accessor('name', {
+        header: 'Demo Name',
         enableGlobalFilter: true,
-        cell: (info) => info.getValue(),
+        cell: info => info.getValue(),
       }),
-      columnHelper.accessor("description", {
-        header: "Description",
+      columnHelper.accessor('description', {
+        header: 'Description',
         enableGlobalFilter: true,
-        cell: (info) => info.getValue(),
+        cell: info => info.getValue(),
       }),
       {
-        id: "action",
-        header: "",
+        id: 'action',
+        header: '',
         cell: (info: CellContext<DemoData, unknown>) => {
           const demoName = info.row.original.name;
           const id = info.row.original.id;
@@ -74,10 +74,10 @@ export default function MifosXDemos() {
     getCoreRowModel: getCoreRowModel(),
     getPaginationRowModel: getPaginationRowModel(),
     getFilteredRowModel: getFilteredRowModel(),
-    state:{
+    state: {
       globalFilter,
     },
-    globalFilterFn:"includesString",
+    globalFilterFn: 'includesString',
   });
 
   return (
@@ -87,12 +87,18 @@ export default function MifosXDemos() {
       </h1>
 
       <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700 overflow-hidden w-4/5">
-      <input type="text" value={globalFilter} onChange={e=>setGlobalFilter(e.target.value)} placeholder="Search demo..." className="border-b-2 border-gray-300 focus:border-blue-500 focus:outline-none h-10 w-sm px-4 py-6 dark:bg-slate-700 bg-slate-100" />
+        <input
+          type="text"
+          value={globalFilter}
+          onChange={e => setGlobalFilter(e.target.value)}
+          placeholder="Search demo..."
+          className="border-b-2 border-gray-300 focus:border-blue-500 focus:outline-none h-10 w-sm px-4 py-6 dark:bg-slate-700 bg-slate-100"
+        />
         <table className="w-full">
           <thead className="bg-gray-200 dark:bg-gray-700 border-b border-gray-300 dark:border-gray-600">
-            {table.getHeaderGroups().map((headerGroup) => (
+            {table.getHeaderGroups().map(headerGroup => (
               <tr key={headerGroup.id}>
-                {headerGroup.headers.map((header) => (
+                {headerGroup.headers.map(header => (
                   <th
                     key={header.id}
                     className="px-6 py-4 text-left text-sm font-medium text-gray-700 dark:text-gray-100"
@@ -114,11 +120,11 @@ export default function MifosXDemos() {
                 key={row.id}
                 className={`hover:bg-blue-50 dark:hover:bg-gray-700 ${
                   index % 2 === 0
-                    ? "bg-white dark:bg-gray-900"
-                    : "bg-gray-100 dark:bg-gray-800"
+                    ? 'bg-white dark:bg-gray-900'
+                    : 'bg-gray-100 dark:bg-gray-800'
                 }`}
               >
-                {row.getVisibleCells().map((cell) => (
+                {row.getVisibleCells().map(cell => (
                   <td
                     key={cell.id}
                     className="px-6 py-4 text-sm text-gray-900 dark:text-gray-200"
@@ -134,16 +140,16 @@ export default function MifosXDemos() {
         <div className="flex items-center justify-between w-full bg-white dark:bg-gray-800 px-6 py-4 border-t border-gray-200 dark:border-gray-700">
           <div className="flex items-center gap-2 text-sm text-gray-600 dark:text-gray-300">
             <span>
-              Showing{" "}
+              Showing{' '}
               {table.getState().pagination.pageIndex *
                 table.getState().pagination.pageSize +
-                1}{" "}
-              to{" "}
+                1}{' '}
+              to{' '}
               {Math.min(
                 (table.getState().pagination.pageIndex + 1) *
                   table.getState().pagination.pageSize,
                 table.getFilteredRowModel().rows.length
-              )}{" "}
+              )}{' '}
               of {table.getFilteredRowModel().rows.length} entries
             </span>
           </div>
@@ -196,12 +202,12 @@ export default function MifosXDemos() {
             </span>
             <select
               value={table.getState().pagination.pageSize}
-              onChange={(e) => {
+              onChange={e => {
                 table.setPageSize(Number(e.target.value));
               }}
               className="border border-gray-300 dark:border-gray-600 dark:bg-gray-800 dark:text-white rounded-md px-2 py-1 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
             >
-              {[5, 10, 20, 30, 40, 50].map((pageSize) => (
+              {[5, 10, 20, 30, 40, 50].map(pageSize => (
                 <option key={pageSize} value={pageSize}>
                   {pageSize}
                 </option>
