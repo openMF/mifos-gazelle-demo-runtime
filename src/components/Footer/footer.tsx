@@ -14,6 +14,9 @@ export const Footer = () => {
             className="opacity-80 dark:opacity-90"
           />
         </div>
+        <p className="text-gray-500 dark:text-gray-400 text-sm mb-8">
+          Discover the power of open-source financial technology solutions
+        </p>
       </div>
     </div>
   );

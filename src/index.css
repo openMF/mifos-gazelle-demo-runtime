@@ -120,23 +120,38 @@
 }
 
 .think-blue-scrollbar {
-  scrollbar-width: thin;
-  scrollbar-color: #146fc4 #e0f0ff;
+  scrollbar-color: var(--scrollbar-thumb) var(--scrollbar-track);
+  --scrollbar-thumb: #146fc4;
+  --scrollbar-track: #e0f0ff;
+}
+
+.dark .think-blue-scrollbar {
+  --scrollbar-thumb: #60a5fa; 
+  --scrollbar-track: #374151; 
 }
 
 .think-blue-scrollbar::-webkit-scrollbar {
-  width: 6px;
+  width: 8px !important;
+  height: 5px;
 }
 
 .think-blue-scrollbar::-webkit-scrollbar-track {
-  background: #e0f0ff;
+  background: var(--scrollbar-track);
 }
 
 .think-blue-scrollbar::-webkit-scrollbar-thumb {
-  background-color: #003b73;
-  border-radius: 10px;
+  background-color: var(--scrollbar-thumb);
+  border-radius: 4px;
 }
 
 .think-blue-scrollbar::-webkit-scrollbar-thumb:hover {
-  background-color: #0056a3;
+  background-color: var(--scrollbar-thumb-hover);
+}
+
+.think-blue-scrollbar {
+  --scrollbar-thumb-hover: #0056a3;
+}
+
+.dark .think-blue-scrollbar {
+  --scrollbar-thumb-hover: #93c5fd;
 }

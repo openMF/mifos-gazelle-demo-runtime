@@ -51,8 +51,8 @@ export const DemoPage = () => {
   };
 
   return (
-    <div className="h-screen bg-gray-200 flex dark:bg-gray-900">
-      <div className="demo-details bg-white h-full w-1/3 shadow-lg overflow-y-auto dark:bg-gray-900 ">
+    <div className="h-screen bg-gray-200 flex dark:bg-gray-900 ">
+      <div className="demo-details bg-white h-full w-1/3 shadow-lg overflow-y-auto dark:bg-gray-900 think-blue-scrollbar">
         <div className="p-6">
           <div className="mb-6">
             <div className="flex items-center justify-between mb-4">
@@ -131,11 +131,9 @@ export const DemoPage = () => {
           </div>
 
           <div className="mb-6 my-2">
-            <h4 className="font-medium text-gray-700 dark:text-gray-400 mb-3">
-              All Steps:
-            </h4>
+           
             <h4 className="font-medium text-gray-700 dark:text-gray-400 mb-3">All Steps:</h4>
-            <div className="space-y-2 overflow-y-auto h-[400px] p-2">
+            <div className="space-y-2 p-2">
               {SampleDemoJsonFile.steps.map((step, index) => (
                 <button
                   key={index}
