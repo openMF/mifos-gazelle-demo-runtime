@@ -126,8 +126,8 @@
 }
 
 .dark .think-blue-scrollbar {
-  --scrollbar-thumb: #60a5fa; 
-  --scrollbar-track: #374151; 
+  --scrollbar-thumb: #60a5fa;
+  --scrollbar-track: #374151;
 }
 
 .think-blue-scrollbar::-webkit-scrollbar {
