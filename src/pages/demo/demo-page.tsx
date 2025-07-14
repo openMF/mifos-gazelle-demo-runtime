@@ -1,25 +1,45 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import {
   ChevronLeft,
   ChevronRight,
   RotateCcw,
   ExternalLink,
 } from 'lucide-react';
-import { SampleDemoJsonFile } from '@/data/sampleDemoFile';
 import { Button } from '@/components/ui/button';
+// import { useLocation } from 'react-router-dom';
+import { fetchDemoData } from '@/lib/api/fetchDemoData';
+
+interface Step {
+  title: string;
+  description: string;
+  url?: string;
+}
+
+interface Demo {
+  demoID: string;
+  demoName: string;
+  demoDescription: string;
+  steps: Step[];
+}
 
 export const DemoPage = () => {
+  const [demoData, setDemoData] = useState<Demo | null>(null);
+  // const location = useLocation();
+  useEffect(() => {
+    // const demoTitle = location.pathname.split('/')[2];
+    fetchDemoData().then(setDemoData).catch(console.error);
+  }, []);
   const [currentStep, setCurrentStep] = useState(0);
   const [iframeUrl, setIframeUrl] = useState('https://sandbox.mifos.community');
 
-  const totalSteps = SampleDemoJsonFile.steps.length;
-  const currentStepData = SampleDemoJsonFile.steps[currentStep];
+  const totalSteps = demoData?.steps.length ?? 0;
+  const currentStepData = demoData?.steps[currentStep];
 
   const handleNext = () => {
     if (currentStep < totalSteps - 1) {
       const nextStepIndex = currentStep + 1;
       setCurrentStep(nextStepIndex);
-      const nextStep = SampleDemoJsonFile.steps[nextStepIndex];
+      const nextStep = demoData?.steps[nextStepIndex];
       if (nextStep?.url) {
         setIframeUrl(nextStep.url);
       }
@@ -30,7 +50,7 @@ export const DemoPage = () => {
     if (currentStep > 0) {
       const prevStepIndex = currentStep - 1;
       setCurrentStep(prevStepIndex);
-      const prevStep = SampleDemoJsonFile.steps[prevStepIndex];
+      const prevStep = demoData?.steps[prevStepIndex];
       if (prevStep?.url) {
         setIframeUrl(prevStep.url);
       }
@@ -39,7 +59,7 @@ export const DemoPage = () => {
 
   const handleStepClick = (stepIndex: number) => {
     setCurrentStep(stepIndex);
-    const step = SampleDemoJsonFile.steps[stepIndex];
+    const step = demoData?.steps[stepIndex];
     if (step?.url) {
       setIframeUrl(step.url);
     }
@@ -57,7 +77,7 @@ export const DemoPage = () => {
           <div className="mb-6">
             <div className="flex items-center justify-between mb-4">
               <h1 className="text-2xl font-bold text-gray-800 dark:text-white">
-                {SampleDemoJsonFile.demoName}
+                {demoData?.demoName}
               </h1>
               <button
                 onClick={handleReset}
@@ -69,7 +89,7 @@ export const DemoPage = () => {
               </button>
             </div>
             <p className="text-gray-600 dark:text-gray-400">
-              {SampleDemoJsonFile.demoDescription}
+              {demoData?.demoDescription}
             </p>
           </div>
 
@@ -123,7 +143,7 @@ export const DemoPage = () => {
             </Button>
             <Button
               onClick={handleNext}
-              disabled={currentStep === SampleDemoJsonFile.steps.length - 1}
+              disabled={currentStep === (demoData?.steps.length ?? 0) - 1}
               className="flex items-center gap-2 px-4 py-2 text-white bg-blue-600 rounded-lg hover:bg-blue-700 dark:bg-blue-500 disabled:opacity-50 disabled:cursor-not-allowed transition-colors cursor-pointer"
               title="Go to next step"
             >
@@ -137,7 +157,7 @@ export const DemoPage = () => {
               All Steps:
             </h4>
             <div className="space-y-2 p-2">
-              {SampleDemoJsonFile.steps.map((step, index) => (
+              {demoData?.steps.map((step, index) => (
                 <button
                   key={index}
                   onClick={() => handleStepClick(index)}

@@ -16,8 +16,9 @@ import {
 } from 'lucide-react';
 
 interface DemoData {
-  name: string;
-  description: string;
+  demoID: string;
+  demoName: string;
+  demoDescription: string;
 }
 
 const columnHelper = createColumnHelper<DemoData>();
@@ -27,11 +28,11 @@ export default function MifosXDemos() {
 
   const columns = useMemo(
     () => [
-      columnHelper.accessor('name', {
+      columnHelper.accessor('demoName', {
         header: 'Demo Name',
         cell: info => info.getValue(),
       }),
-      columnHelper.accessor('description', {
+      columnHelper.accessor('demoDescription', {
         header: 'Description',
         cell: info => info.getValue(),
       }),
@@ -39,7 +40,10 @@ export default function MifosXDemos() {
         id: 'action',
         header: '',
         cell: () => (
-          <Button className="bg-blue-500 text-white px-3 py-1 rounded text-sm hover:bg-blue-600 cursor-pointer" title="Start this demo">
+          <Button
+            className="bg-blue-500 text-white px-3 py-1 rounded text-sm hover:bg-blue-600 cursor-pointer"
+            title="Start this demo"
+          >
             Start Demo
           </Button>
         ),
