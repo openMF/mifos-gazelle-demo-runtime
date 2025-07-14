@@ -6,8 +6,8 @@ import {
   ExternalLink,
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import { useLocation } from 'react-router-dom';
-import axios from 'axios';
+// import { useLocation } from 'react-router-dom';
+import { fetchDemoData } from '@/lib/api/fetchDemoData';
 
 interface Step {
   title: string;
@@ -22,25 +22,17 @@ interface Demo {
   steps: Step[];
 }
 
-
 export const DemoPage = () => {
   const [demoData, setDemoData] = useState<Demo | null>(null);
-  const location = useLocation();
+  // const location = useLocation();
   useEffect(() => {
-    const demoTitle = location.pathname.split('/')[2];
-    const fetchDemoData = async () => {
-      const response = await axios.get(`${import.meta.env.VITE_API_URL}/demoData`); 
-      setDemoData(response.data);
-      console.log(response.data);
-    };
-  
-    fetchDemoData();
-    console.log(demoTitle);
-  },[])
+    // const demoTitle = location.pathname.split('/')[2];
+    fetchDemoData().then(setDemoData).catch(console.error);
+  }, []);
   const [currentStep, setCurrentStep] = useState(0);
   const [iframeUrl, setIframeUrl] = useState('https://sandbox.mifos.community');
 
-  const totalSteps = demoData?.steps.length??0 ;
+  const totalSteps = demoData?.steps.length ?? 0;
   const currentStepData = demoData?.steps[currentStep];
 
   const handleNext = () => {

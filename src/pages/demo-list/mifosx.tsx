@@ -17,7 +17,7 @@ import {
 } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import slugify from 'slugify';
-import axios from 'axios';
+import { fetchDemoListData } from '@/lib/api/fetchDemoListData';
 
 interface DemoData {
   demoID: string;
@@ -37,17 +37,8 @@ export default function MifosXDemos() {
   const [data, setData] = useState<DemoData[]>([]);
 
   useEffect(() => {
-    const fetchDemoListData = async () => {
-      const response = await axios.get(`${import.meta.env.VITE_API_URL}/demoList`);
-      setData(response.data);
-      console.log(response.data);
-    };
-  
-    fetchDemoListData();
+    fetchDemoListData().then(setData).catch(console.error);
   }, []);
-  
-
-
 
   const columns = useMemo(
     () => [
