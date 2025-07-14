@@ -16,8 +16,9 @@ import {
 } from 'lucide-react';
 
 interface DemoData {
-  name: string;
-  description: string;
+  demoID: string;
+  demoName: string;
+  demoDescription: string;
 }
 
 const columnHelper = createColumnHelper<DemoData>();
@@ -27,11 +28,11 @@ export default function PheeDemos() {
 
   const columns = useMemo(
     () => [
-      columnHelper.accessor('name', {
+      columnHelper.accessor('demoName', {
         header: 'Demo Name',
         cell: info => info.getValue(),
       }),
-      columnHelper.accessor('description', {
+      columnHelper.accessor('demoDescription', {
         header: 'Description',
         cell: info => info.getValue(),
       }),
