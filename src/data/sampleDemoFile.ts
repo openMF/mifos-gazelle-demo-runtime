@@ -1,6 +1,14 @@
 export const SampleDemoJsonFile = {
+  demoID: '123e4567-e89b-12d3-a456-426614174000',
   demoName: 'Create Client',
-  demoDescription: 'Create a client in MifosX',
+  DPG: 'mifosx',
+  demoDescription: 'Walkthrough for creating a client in Mifosx',
+  createdAt: '2025-07-11T14:03:00Z',
+  updatedAt: '2025-07-11T14:10:00Z',
+  createdBy: 'yash.sharma',
+  lastUpdatedBy: 'yash.sharma',
+  demoTags: ['pilot', 'onboarding'],
+  version: 'v1.0',
   steps: [
     {
       title: 'Login to MifosX',

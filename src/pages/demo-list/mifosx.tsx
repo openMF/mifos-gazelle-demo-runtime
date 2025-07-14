@@ -7,8 +7,7 @@ import {
   useReactTable,
   type CellContext,
 } from '@tanstack/react-table';
-import { useMemo, useState } from 'react';
-import { DemoSampleData } from '@/data/DemoTableSampleData';
+import { useMemo, useState, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
 import {
   ChevronLeft,
@@ -18,11 +17,12 @@ import {
 } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import slugify from 'slugify';
+import axios from 'axios';
 
 interface DemoData {
-  id: string;
-  name: string;
-  description: string;
+  demoID: string;
+  demoName: string;
+  demoDescription: string;
 }
 
 const columnHelper = createColumnHelper<DemoData>();
@@ -34,16 +34,29 @@ export default function MifosXDemos() {
     navigate(`/demo/${id}/${demoSlug}`);
   };
   const [globalFilter, setGlobalFilter] = useState('');
-  const data = useMemo(() => [...DemoSampleData], []);
+  const [data, setData] = useState<DemoData[]>([]);
+
+  useEffect(() => {
+    const fetchDemoListData = async () => {
+      const response = await axios.get(`${import.meta.env.VITE_API_URL}/demoList`);
+      setData(response.data);
+      console.log(response.data);
+    };
+  
+    fetchDemoListData();
+  }, []);
+  
+
+
 
   const columns = useMemo(
     () => [
-      columnHelper.accessor('name', {
+      columnHelper.accessor('demoName', {
         header: 'Demo Name',
         enableGlobalFilter: true,
         cell: info => info.getValue(),
       }),
-      columnHelper.accessor('description', {
+      columnHelper.accessor('demoDescription', {
         header: 'Description',
         enableGlobalFilter: true,
         cell: info => info.getValue(),
@@ -52,8 +65,8 @@ export default function MifosXDemos() {
         id: 'action',
         header: '',
         cell: (info: CellContext<DemoData, unknown>) => {
-          const demoName = info.row.original.name;
-          const id = info.row.original.id;
+          const demoName = info.row.original.demoName;
+          const id = info.row.original.demoID;
           return (
             <Button
               className="bg-blue-500 text-white px-3 py-1 rounded text-sm hover:bg-blue-600 cursor-pointer"
