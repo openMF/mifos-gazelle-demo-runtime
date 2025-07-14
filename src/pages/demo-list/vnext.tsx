@@ -40,7 +40,10 @@ export default function MifosXDemos() {
         id: 'action',
         header: '',
         cell: () => (
-          <Button className="bg-blue-500 text-white px-3 py-1 rounded text-sm hover:bg-blue-600 cursor-pointer" title="Start this demo">
+          <Button
+            className="bg-blue-500 text-white px-3 py-1 rounded text-sm hover:bg-blue-600 cursor-pointer"
+            title="Start this demo"
+          >
             Start Demo
           </Button>
         ),
