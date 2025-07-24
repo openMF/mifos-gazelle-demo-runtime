@@ -9,7 +9,7 @@ export const BackButton = () => {
   return (
     <div title="Back">
       <ArrowLeft
-        size={30}
+        size={26}
         className="cursor-pointer text-gray-700 dark:text-gray-300"
         onClick={handleBackButtonClick}
       />

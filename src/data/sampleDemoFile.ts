@@ -17,6 +17,12 @@ export const SampleDemoJsonFile = {
         'Enter the sample credentials to login to MifosX, username: mifos, paswword: password',
     },
     {
+      title: 'Login to MifosX',
+      url: 'https://ops.mifos.gazelle.test/',
+      description:
+        'Enter the sample credentials to login to MifosX, username: mifos, paswword: password',
+    },
+    {
       title: 'Click Institution on the Navbar',
       url: 'https://sandbox.mifos.community/#/home',
       description: 'This will open a dropdown menu. Click on Clients',
