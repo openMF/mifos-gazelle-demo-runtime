@@ -28,4 +28,4 @@ jobs:
         run: npx prettier --check "**/*.{ts,tsx,js,jsx,json,css,md}"
 
       - name: Run ESLint
-        run: npx eslint "**/*.{ts,tsx}" 
+        run: npx eslint "**/*.{ts,tsx}"

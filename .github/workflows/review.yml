@@ -2,7 +2,7 @@ name: AI Code Review
 
 on:
   pull_request:
-    branches: [ "main", "dev" ]
+    branches: ['main', 'dev']
 
 jobs:
   ai-code-review:
@@ -13,4 +13,4 @@ jobs:
       - name: AI Code Review Action
         uses: villesau/ai-codereviewer@v2.7.0
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }} 
+          github_token: ${{ secrets.GITHUB_TOKEN }}

@@ -13,7 +13,7 @@ export const SideNav = () => {
   const isHomePage = location.pathname === '/';
   return (
     <div
-      className="h-screen w-14 bg-white dark:bg-gray-900 flex flex-col items-center border-r-2 border-gray-200 
+      className="h-screen w-12 bg-white dark:bg-gray-900 flex flex-col items-center border-r-2 border-gray-200 
     dark:border-gray-700"
     >
       <div className="logo h-14 w-full flex items-center justify-center border-b-2 border-gray-200 dark:border-gray-700">
@@ -30,7 +30,7 @@ export const SideNav = () => {
       <div className="w-16 flex-1 flex flex-col items-center gap-4 pt-4">
         <div title="Home">
           <Home
-            size={30}
+            size={26}
             className="cursor-pointer text-gray-700 dark:text-gray-300"
             onClick={handleHomeButtonClick}
           />
