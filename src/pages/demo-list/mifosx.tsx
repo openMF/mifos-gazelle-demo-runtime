@@ -133,22 +133,6 @@ export default function MifosXDemos() {
             </div>
           </div>
 
-          {loading && (
-            <div className=" bg-gradient-to-br from-slate-50 to-slate-100 dark:from-slate-900 dark:to-slate-800">
-              <div className=" mx-auto space-y-6 flex justify-center items-center">
-                <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-xl border dark:border-gray-700 p-6 space-y-4 min-w-7xl">
-                  {Array.from({ length: 5 }).map((_, i) => (
-                    <div key={i} className="grid grid-cols-3 gap-6">
-                      <Skeleton className="h-10 w-full bg-gray-200 dark:bg-gray-700" />
-                      <Skeleton className="h-10 w-full bg-gray-200 dark:bg-gray-700" />
-                      <Skeleton className="h-10 w-32 bg-gray-200 dark:bg-gray-700" />
-                    </div>
-                  ))}
-                </div>
-              </div>
-            </div>
-          )}
-
           <div className="overflow-x-auto">
             <table className="min-w-full divide-y divide-gray-200 dark:divide-gray-700 dark:bg-gray-800">
               <thead className="bg-gray-50 dark:bg-gray-750">
@@ -170,6 +154,7 @@ export default function MifosXDemos() {
                   </tr>
                 ))}
               </thead>
+
               <tbody className="bg-white dark:bg-gray-800 divide-y divide-gray-200 dark:divide-gray-700">
                 {table.getRowModel().rows.map(row => (
                   <tr
@@ -192,6 +177,21 @@ export default function MifosXDemos() {
               </tbody>
             </table>
           </div>
+          {loading && (
+            <div className=" bg-gradient-to-br from-slate-50 to-slate-100 dark:from-slate-900 dark:to-slate-800">
+              <div className=" mx-auto space-y-6 flex justify-center items-center">
+                <div className="bg-white dark:bg-gray-800 rounded-2xl dark:border-gray-700 p-6 space-y-4 min-w-7xl">
+                  {Array.from({ length: 5 }).map((_, i) => (
+                    <div key={i} className="grid grid-cols-3 gap-6">
+                      <Skeleton className="h-10 w-full bg-gray-200 dark:bg-gray-700" />
+                      <Skeleton className="h-10 w-full bg-gray-200 dark:bg-gray-700" />
+                      <Skeleton className="h-10 w-32 bg-gray-200 dark:bg-gray-700" />
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+          )}
 
           <div className="bg-gray-50 dark:bg-gray-750 px-8 py-6 border-t border-gray-200 dark:border-gray-700 dark:bg-gray-800">
             <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">

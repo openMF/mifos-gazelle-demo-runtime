@@ -11,7 +11,7 @@ import {
 // import { fetchDemoData } from '@/lib/api/fetchDemoData';
 import { SampleDemoJsonFile } from '@/data/sampleDemoFile';
 import { Button } from '@/components/ui/button';
-import { getUniqueBaseUrls } from '@/lib/demofileparser/getBaseUrl';
+import { getUniqueBaseUrls, mapUrl } from '@/lib/demofileparser/getBaseUrl';
 
 interface Step {
   title: string;
@@ -132,11 +132,11 @@ export const DemoPage = () => {
 
   return (
     <div
-      className="h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-100 dark:from-gray-900 dark:via-slate-900
-     dark:to-indigo-950 flex overflow-hidden"
+      className="md:h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-100 dark:from-gray-900 dark:via-slate-900
+     dark:to-indigo-950 flex overflow-y-auto md:overflow-hidden flex-col md:flex-row"
     >
       <div
-        className="demo-details bg-white/80 dark:bg-gray-900/80 backdrop-blur-xl h-full w-1/3 shadow-2xl overflow-y-auto border-r
+        className="demo-details bg-white/80 dark:bg-gray-900/80 backdrop-blur-xl min-h-28 md:h-full w-full md:w-1/3 shadow-2xl overflow-y-auto border-r
        border-white/20 dark:border-gray-700/20"
       >
         <div className="p-8 space-y-8">
@@ -281,7 +281,7 @@ export const DemoPage = () => {
             </button>
           </div>
 
-          <div className="space-y-4">
+          <div className="space-y-4 hidden md:block lg:block xl:block">
             <h4 className="font-bold text-lg text-gray-800 dark:text-gray-200 flex items-center gap-2">
               <Sparkles size={18} className="text-blue-500" />
               Tutorial Steps
@@ -341,20 +341,23 @@ export const DemoPage = () => {
         </div>
       </div>
 
-      <div className="iframe bg-white dark:bg-gray-900 h-full w-2/3 relative overflow-hidden">
+      <div className="iframe bg-white dark:bg-gray-900 h-[800px] md:h-full md:w-2/3 relative overflow-hidden">
         <div className="h-full flex flex-col relative">
           <div
             className="bg-gradient-to-r from-gray-50 to-white dark:from-gray-800 dark:to-gray-900 border-b border-gray-200
            dark:border-gray-700 flex items-center justify-between shadow-sm"
           >
-            <div className="flex items-center gap-4 min-h-10 px-2 py-0">
+            <div className="flex items-center gap-1 min-h-10 px-2 py-0">
               <div className="flex gap-1">
                 <div className="w-3 h-3 bg-red-500 rounded-full shadow-sm hover:bg-red-600 transition-colors cursor-pointer"></div>
                 <div className="w-3 h-3 bg-yellow-500 rounded-full shadow-sm hover:bg-yellow-600 transition-colors cursor-pointer"></div>
                 <div className="w-3 h-3 bg-green-500 rounded-full shadow-sm hover:bg-green-600 transition-colors cursor-pointer"></div>
               </div>
-              <div className="bg-gray-100 dark:bg-gray-800 rounded-lg px-4  flex-1 max-w-md">
-                <span className="text-sm text-gray-600 dark:text-gray-400 font-mono truncate block">
+              <div className="bg-gray-100 dark:bg-gray-800 rounded-lg px-2  flex-1 max-w-md">
+                <span
+                  className="text-sm min-w-20 max-w-40 text-gray-600 dark:text-gray-400 font-mono truncate block"
+                  title={iframeUrl}
+                >
                   {iframeUrl}
                 </span>
               </div>
@@ -366,12 +369,12 @@ export const DemoPage = () => {
                   className={`h-full max-w-40 rounded-none flex-1 transition-all duration-200
         ${
           iframeUrl?.startsWith(baseUrl)
-            ? 'bg-blue-400 hover:bg-blue-500 text-white shadow-sm'
-            : 'bg-gray-200 hover:bg-gray-300 text-gray-500'
+            ? 'bg-blue-400 hover:bg-blue-500 text-white shadow-sm dark:bg-blue-600'
+            : 'bg-gray-200 hover:bg-gray-300 text-gray-500 dark:bg-slate-400 dark:text-gray-600'
         } font-semibold`}
                   onClick={() => setIframeUrl(baseUrl)}
                 >
-                  {new URL(baseUrl).hostname}
+                  {mapUrl.get(baseUrl)}
                 </Button>
               ))}
             </div>
@@ -407,7 +410,7 @@ export const DemoPage = () => {
               src={iframeUrl}
               className={`w-full h-full border-0 transition-opacity duration-300 ${isTransitioning ? 'opacity-50' : 'opacity-100'}`}
               title="MifosX Demo"
-              sandbox="allow-scripts allow-same-origin allow-forms allow-popups allow-top-navigation"
+              sandbox="allow-scripts allow-same-origin allow-forms allow-popups allow-top-navigation-by-user-activation"
             />
           </div>
         </div>
