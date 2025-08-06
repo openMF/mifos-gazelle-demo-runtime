@@ -29,9 +29,15 @@ interface Demo {
 export const DemoPage = () => {
   const [demoData, setDemoData] = useState<Demo | null>(null);
   const [isLoading, setIsLoading] = useState(true);
-  const [baseUrls, setBaseUrls] = useState<string[]>([
-    SampleDemoJsonFile?.steps[0].url || '',
-  ]);
+  const [activeBaseUrl, setActiveBaseUrl] = useState<string>('');
+  const [baseUrls, setBaseUrls] = useState<Map<string, string>>(
+    new Map([
+      [
+        SampleDemoJsonFile?.steps[0].url || '',
+        SampleDemoJsonFile?.steps[0].url || '',
+      ],
+    ])
+  );
 
   // const location = useLocation();
 
@@ -39,11 +45,14 @@ export const DemoPage = () => {
     // const demoTitle = location.pathname.split('/')[2];
     // fetchDemoData()
     //   .then(setDemoData)
-    //   .catch(console.error)
     //   .finally(() => setIsLoading(false));
     setIsLoading(false);
     setDemoData(SampleDemoJsonFile);
     setIframeUrl(SampleDemoJsonFile?.steps[0].url ?? '');
+    const initialUrl = SampleDemoJsonFile?.steps[0].url ?? '';
+    const parsedUrl = new URL(initialUrl);
+    const initialBaseUrl = `${parsedUrl.protocol}//${parsedUrl.hostname}`;
+    setActiveBaseUrl(initialBaseUrl);
   }, []);
 
   const [currentStep, setCurrentStep] = useState(0);
@@ -52,7 +61,6 @@ export const DemoPage = () => {
   const [isTransitioning, setIsTransitioning] = useState(false);
 
   useEffect(() => {
-    console.log(demoData?.steps[0].url);
     let interval: NodeJS.Timeout;
     if (isAutoPlay && demoData) {
       interval = setInterval(() => {
@@ -70,8 +78,10 @@ export const DemoPage = () => {
     setCurrentStep(stepIndex);
     if (url) {
       setTimeout(() => {
+        const parsedUrl = new URL(url);
+        const baseUrl = `${parsedUrl.protocol}//${parsedUrl.hostname}`;
+        setActiveBaseUrl(baseUrl);
         getUniqueBaseUrls(url, setBaseUrls);
-        console.log(baseUrls);
         setIframeUrl(url);
         setTimeout(() => setIsTransitioning(false), 300);
       }, 150);
@@ -106,6 +116,7 @@ export const DemoPage = () => {
   const handleReset = () => {
     setIsAutoPlay(false);
     handleStepTransition(0, 'https://sandbox.mifos.community');
+    setActiveBaseUrl('https://sandbox.mifos.community');
   };
 
   if (isLoading) {
@@ -356,23 +367,23 @@ export const DemoPage = () => {
               <div className="bg-gray-100 dark:bg-gray-800 rounded-lg px-2  flex-1 max-w-md">
                 <span
                   className="text-sm min-w-20 max-w-40 text-gray-600 dark:text-gray-400 font-mono truncate block"
-                  title={iframeUrl}
+                  title={activeBaseUrl}
                 >
-                  {iframeUrl}
+                  {activeBaseUrl}
                 </span>
               </div>
             </div>
             <div className="w-full h-full flex">
-              {baseUrls.map((baseUrl, idx) => (
+              {Array.from(baseUrls.keys()).map((baseUrl, idx) => (
                 <Button
                   key={idx}
-                  className={`h-full max-w-40 rounded-none flex-1 transition-all duration-200
+                  className={`h-full max-w-40 rounded-none flex-1 transition-all duration-200 cursor-pointer
         ${
           iframeUrl?.startsWith(baseUrl)
             ? 'bg-blue-400 hover:bg-blue-500 text-white shadow-sm dark:bg-blue-600'
             : 'bg-gray-200 hover:bg-gray-300 text-gray-500 dark:bg-slate-400 dark:text-gray-600'
         } font-semibold`}
-                  onClick={() => setIframeUrl(baseUrl)}
+                  onClick={() => setActiveBaseUrl(baseUrl)}
                 >
                   {mapUrl.get(baseUrl)}
                 </Button>
@@ -392,7 +403,7 @@ export const DemoPage = () => {
             </button>
           </div>
 
-          <div className="flex-1 relative bg-white dark:bg-gray-900">
+          <div className="flex-1 relative bg-white dark:bg-gray-400">
             {isTransitioning && (
               <div className="absolute inset-0 bg-white/80 dark:bg-gray-900/80 backdrop-blur-sm z-10 flex items-center justify-center">
                 <div className="text-center space-y-4">
@@ -406,12 +417,19 @@ export const DemoPage = () => {
                 </div>
               </div>
             )}
-            <iframe
-              src={iframeUrl}
-              className={`w-full h-full border-0 transition-opacity duration-300 ${isTransitioning ? 'opacity-50' : 'opacity-100'}`}
-              title="MifosX Demo"
-              sandbox="allow-scripts allow-same-origin allow-forms allow-popups allow-top-navigation-by-user-activation"
-            />
+            {Array.from(baseUrls.entries()).map(([baseUrl, url]) => (
+              <iframe
+                key={baseUrl}
+                src={url}
+                className={`w-full h-full border-0 absolute top-0 left-0 transition-opacity duration-300 ${
+                  activeBaseUrl === baseUrl
+                    ? 'opacity-100 z-10'
+                    : 'opacity-0 z-0'
+                }`}
+                title="MifosX Demo"
+                sandbox="allow-scripts allow-same-origin allow-forms allow-popups allow-top-navigation-by-user-activation"
+              />
+            ))}
           </div>
         </div>
       </div>

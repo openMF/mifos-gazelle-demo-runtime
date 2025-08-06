@@ -20,7 +20,8 @@ import {
 } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import slugify from 'slugify';
-import { fetchDemoListData } from '@/lib/api/fetchDemoListData';
+// import { fetchDemoListData } from '@/lib/api/fetchDemoListData';
+import { DemoSampleData } from '@/data/DemoTableSampleData';
 
 interface DemoData {
   demoID: string;
@@ -42,10 +43,11 @@ export default function MifosXDemos() {
 
   useEffect(() => {
     setLoading(true);
-    fetchDemoListData()
-      .then(setData)
-      .catch(console.error)
-      .finally(() => setLoading(false));
+    setData(DemoSampleData);
+    setLoading(false);
+    // fetchDemoListData()
+    //   .then(setData)
+    //   .finally(() => setLoading(false));
   }, []);
 
   const columns = useMemo(
