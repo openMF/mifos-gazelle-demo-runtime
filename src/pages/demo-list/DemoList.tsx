@@ -5,6 +5,7 @@ const demoComponentMap: Record<string, React.LazyExoticComponent<React.FC>> = {
   mifosx: lazy(() => import('./mifosx')),
   phee: lazy(() => import('./phee')),
   vnext: lazy(() => import('./vnext')),
+  platform_demos: lazy(() => import('./platform-demos')),
 };
 
 export const DemoList = () => {
