@@ -19,12 +19,11 @@ export const SamplePlatformDemoData = [
   },
   {
     demoID: 'f8a62029-2a91-4ab5-9d8d-f2b674acbf03',
-    demoName: 'Approve Loan Application',
+    demoName: 'View Payment Status',
     DPG: 'MifosFusion',
-    demoDescription:
-      'Review and approve submitted loan applications after verifying eligibility.',
+    demoDescription: 'Review the payments.',
     createdAt: new Date('2025-07-12T14:45:00Z'),
-    platforms: ['MifosX', 'Vnext'],
+    platforms: ['MifosX', 'Vnext', 'PHEE'],
   },
   {
     demoID: 'ec54c928-1234-4bc7-9caa-36b9f5e9b004',

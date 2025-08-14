@@ -1,6 +1,7 @@
 export const mapUrl = new Map<string, string>([
-  ['https://sandbox.mifos.community', 'MifosX'],
+  ['http://mifos.mifos.gazelle.test', 'MifosX'],
   ['https://ops.mifos.gazelle.test', 'PHEE'],
+  ['http://vnextadmin.mifos.gazelle.test', 'Vnext'],
 ]);
 
 export const getUniqueBaseUrls = (
