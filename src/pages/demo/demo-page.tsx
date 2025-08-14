@@ -9,7 +9,7 @@ import {
 } from 'lucide-react';
 // import { useLocation } from 'react-router-dom';
 // import { fetchDemoData } from '@/lib/api/fetchDemoData';
-import { SampleDemoJsonFile } from '@/data/sampleDemoFile';
+import { SamplePlatformDemo } from '@/data/platform-demo';
 import { Button } from '@/components/ui/button';
 import { getUniqueBaseUrls, mapUrl } from '@/lib/demofileparser/getBaseUrl';
 
@@ -30,13 +30,16 @@ export const DemoPage = () => {
   const [demoData, setDemoData] = useState<Demo | null>(null);
   const [isLoading, setIsLoading] = useState(true);
   const [activeBaseUrl, setActiveBaseUrl] = useState<string>('');
+  const firstStepUrl = SamplePlatformDemo?.steps[0].url;
   const [baseUrls, setBaseUrls] = useState<Map<string, string>>(
-    new Map([
-      [
-        SampleDemoJsonFile?.steps[0].url || '',
-        SampleDemoJsonFile?.steps[0].url || '',
-      ],
-    ])
+    firstStepUrl
+      ? new Map([[firstStepUrl, firstStepUrl]])
+      : new Map([
+          [
+            SamplePlatformDemo?.steps[0].url || '',
+            SamplePlatformDemo?.steps[0].url || '',
+          ],
+        ])
   );
 
   // const location = useLocation();
@@ -47,10 +50,11 @@ export const DemoPage = () => {
     //   .then(setDemoData)
     //   .finally(() => setIsLoading(false));
     setIsLoading(false);
-    setDemoData(SampleDemoJsonFile);
-    setIframeUrl(SampleDemoJsonFile?.steps[0].url ?? '');
-    const initialUrl = SampleDemoJsonFile?.steps[0].url ?? '';
+    setDemoData(SamplePlatformDemo);
+    setIframeUrl(SamplePlatformDemo?.steps[0].url ?? '');
+    const initialUrl = SamplePlatformDemo?.steps[0].url ?? '';
     const parsedUrl = new URL(initialUrl);
+    handleStepTransition(0, parsedUrl.href);
     const initialBaseUrl = `${parsedUrl.protocol}//${parsedUrl.hostname}`;
     setActiveBaseUrl(initialBaseUrl);
   }, []);
@@ -115,8 +119,8 @@ export const DemoPage = () => {
 
   const handleReset = () => {
     setIsAutoPlay(false);
-    handleStepTransition(0, 'https://sandbox.mifos.community');
-    setActiveBaseUrl('https://sandbox.mifos.community');
+    handleStepTransition(0, firstStepUrl);
+    setActiveBaseUrl('');
   };
 
   if (isLoading) {
@@ -374,20 +378,22 @@ export const DemoPage = () => {
               </div>
             </div>
             <div className="w-full h-full flex">
-              {Array.from(baseUrls.keys()).map((baseUrl, idx) => (
-                <Button
-                  key={idx}
-                  className={`h-full max-w-40 rounded-none flex-1 transition-all duration-200 cursor-pointer
+              {Array.from(baseUrls.keys())
+                .filter(baseUrl => baseUrl && mapUrl.has(baseUrl))
+                .map((baseUrl, idx) => (
+                  <Button
+                    key={idx}
+                    className={`h-full max-w-40 rounded-none flex-1 transition-all duration-200 cursor-pointer
         ${
           iframeUrl?.startsWith(baseUrl)
             ? 'bg-blue-400 hover:bg-blue-500 text-white shadow-sm dark:bg-blue-600'
             : 'bg-gray-200 hover:bg-gray-300 text-gray-500 dark:bg-slate-400 dark:text-gray-600'
         } font-semibold`}
-                  onClick={() => setActiveBaseUrl(baseUrl)}
-                >
-                  {mapUrl.get(baseUrl)}
-                </Button>
-              ))}
+                    onClick={() => setActiveBaseUrl(baseUrl)}
+                  >
+                    {mapUrl.get(baseUrl)}
+                  </Button>
+                ))}
             </div>
 
             <button
