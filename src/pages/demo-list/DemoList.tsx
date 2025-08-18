@@ -1,26 +1,18 @@
-import { lazy, Suspense } from 'react';
 import { useParams } from 'react-router-dom';
+import { lazy, Suspense } from 'react';
 
-const demoComponentMap: Record<string, React.LazyExoticComponent<React.FC>> = {
-  mifosx: lazy(() => import('./mifosx')),
-  phee: lazy(() => import('./phee')),
-  vnext: lazy(() => import('./vnext')),
-  platform_demos: lazy(() => import('./platform-demos')),
-};
+const PlatformDemos = lazy(() => import('./platform-demos'));
+const ProductDemos = lazy(() => import('./product-demos'));
 
 export const DemoList = () => {
   const { product } = useParams();
 
-  const Component = product ? demoComponentMap[product] : null;
-
   return (
     <Suspense fallback={<div className="p-6 text-center">Loading demo...</div>}>
-      {Component ? (
-        <Component />
+      {product === 'platform_demos' ? (
+        <PlatformDemos />
       ) : (
-        <div className="p-6 text-center text-red-500">
-          Invalid demo: {product}
-        </div>
+        <ProductDemos product={product as 'mifosx' | 'phee' | 'vnext'} />
       )}
     </Suspense>
   );
