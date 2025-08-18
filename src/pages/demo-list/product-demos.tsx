@@ -31,7 +31,11 @@ interface DemoData {
 
 const columnHelper = createColumnHelper<DemoData>();
 
-export default function MifosXDemos() {
+type ProductDemosProps = {
+  product: 'mifosx' | 'phee' | 'vnext';
+};
+
+export default function ProductDemos({ product }: ProductDemosProps) {
   const navigate = useNavigate();
   const NavigateToDemo = (id: string, demoName: string) => {
     const demoSlug = slugify(demoName, { lower: true });
@@ -110,12 +114,13 @@ export default function MifosXDemos() {
       <div className="max-w-7xl mx-auto">
         <div className="text-center mb-12">
           <h1 className="text-4xl font-bold text-gray-900 dark:text-white mb-4">
-            MifosX Demo Center
+            {product.toUpperCase()} Demo Center
           </h1>
           <p className="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto leading-relaxed">
-            Explore guided walkthroughs of key flows in the MifosX application.
-            Each demo provides an interactive experience to help you understand
-            our platform's capabilities.
+            Explore guided walkthroughs of key flows in the{' '}
+            {product.toUpperCase()} application. Each demo provides an
+            interactive experience to help you understand our platform's
+            capabilities.
           </p>
         </div>
 

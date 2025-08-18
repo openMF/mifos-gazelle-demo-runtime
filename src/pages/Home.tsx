@@ -15,15 +15,12 @@ export const Home = () => {
                             px-4 py-2 rounded-full text-sm font-medium mb-8"
               >
                 <span className="w-2 h-2 bg-blue-400 dark:bg-blue-500 rounded-full mr-2"></span>
-                Product Demo Platform
+                Demo Platform
               </div>
 
               <h1 className="text-5xl md:text-6xl font-bold text-gray-900 dark:text-white mb-8 leading-tight">
                 Welcome to the Mifos
                 <br />
-                <span className="bg-gradient-to-r from-blue-600 to-blue-500 dark:from-blue-400 dark:to-blue-300 bg-clip-text text-transparent">
-                  Product
-                </span>{' '}
                 <span className="relative inline-block text-blue-600 dark:text-blue-300">
                   Demo
                   <div className="absolute left-0 right-0 -bottom-2 flex justify-center">
@@ -54,10 +51,10 @@ export const Home = () => {
               </h1>
 
               <p className="text-xl text-gray-600 dark:text-gray-300 max-w-2xl leading-relaxed font-light mb-8 mx-auto lg:mx-0">
-                Experience interactive demonstrations of our products — MifosX,
-                Phee, and VNext. Explore comprehensive step-by-step guides
-                designed to showcase the full potential of our financial
-                technology solutions.
+                Experience interactive demonstrations of our products and
+                platform. Explore comprehensive step-by-step guides designed to
+                showcase the full potential of our financial technology
+                solutions.
               </p>
 
               <a
