@@ -11,7 +11,8 @@ import {
 // import { fetchDemoData } from '@/lib/api/fetchDemoData';
 import { SamplePlatformDemo } from '@/data/platform-demo';
 import { Button } from '@/components/ui/button';
-import { getUniqueBaseUrls, mapUrl } from '@/lib/demofileparser/getBaseUrl';
+import { getUniqueBaseUrls } from '@/lib/demofileparser/getBaseUrl';
+import { mapUrl } from '@/types/demodata';
 
 interface Step {
   title: string;
@@ -31,6 +32,10 @@ export const DemoPage = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [activeBaseUrl, setActiveBaseUrl] = useState<string>('');
   const firstStepUrl = SamplePlatformDemo?.steps[0].url;
+  const [currentStep, setCurrentStep] = useState(0);
+  const [iframeUrl, setIframeUrl] = useState('');
+  const [isAutoPlay, setIsAutoPlay] = useState(false);
+  const [isTransitioning, setIsTransitioning] = useState(false);
   const [baseUrls, setBaseUrls] = useState<Map<string, string>>(
     firstStepUrl
       ? new Map([[firstStepUrl, firstStepUrl]])
@@ -58,11 +63,6 @@ export const DemoPage = () => {
     const initialBaseUrl = `${parsedUrl.protocol}//${parsedUrl.hostname}`;
     setActiveBaseUrl(initialBaseUrl);
   }, []);
-
-  const [currentStep, setCurrentStep] = useState(0);
-  const [iframeUrl, setIframeUrl] = useState('');
-  const [isAutoPlay, setIsAutoPlay] = useState(false);
-  const [isTransitioning, setIsTransitioning] = useState(false);
 
   useEffect(() => {
     let interval: NodeJS.Timeout;

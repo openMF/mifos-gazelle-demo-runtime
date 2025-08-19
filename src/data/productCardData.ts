@@ -15,3 +15,10 @@ export const products = [
       'Next-generation financial platform built with modern architecture for enhanced scalability and performance.',
   },
 ];
+
+export const platformDemos = [
+  {
+    title: 'Platform_Demos',
+    description: 'Mmore than one product or non-product demos',
+  },
+];

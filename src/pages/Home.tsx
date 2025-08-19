@@ -1,5 +1,5 @@
 import { ProductCard } from '@/components/Cards/product-card';
-import { products } from '@/data/productCardData';
+import { platformDemos, products } from '@/data/productCardData';
 
 export const Home = () => {
   return (
@@ -78,21 +78,40 @@ export const Home = () => {
       </section>
 
       <section id="demos" className="relative py-24 px-6">
-        <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-16">
-            <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-8 text-center">
-              Explore Product Demos
-            </h2>
-          </div>
+        <div className="max-w-7xl mx-auto flex flex-col gap-24">
+          <div>
+            <div className="text-center mb-16">
+              <h2 className="text-4xl font-bold text-gray-900 dark:text-white mb-8 text-center">
+                Explore Product Demos
+              </h2>
+            </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-16 justify-items-center mt-14">
-            {products.map((product, index) => (
-              <ProductCard
-                key={index}
-                title={product.title}
-                description={product.description}
-              />
-            ))}
+            <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-16 justify-items-center mt-14">
+              {products.map((product, index) => (
+                <ProductCard
+                  key={index}
+                  title={product.title}
+                  description={product.description}
+                />
+              ))}
+            </div>
+          </div>
+          <div>
+            <div className="text-center mb-16">
+              <h2 className="text-4xl font-bold text-gray-900 dark:text-white mb-8 text-center">
+                Explore Platform Demos
+              </h2>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-16 justify-items-center mt-14">
+              {platformDemos.map((product, index) => (
+                <ProductCard
+                  key={index}
+                  title={product.title}
+                  description={product.description}
+                />
+              ))}
+            </div>
           </div>
         </div>
       </section>
