@@ -31,13 +31,8 @@ import {
 } from '@/components/ui/dropdown-menu';
 // import { fetchDemoListData } from '@/lib/api/fetchDemoListData';
 import { SamplePlatformDemoData } from '@/data/sample-platform-demos';
-
-interface DemoData {
-  demoID: string;
-  demoName: string;
-  demoDescription: string;
-  platforms: string[];
-}
+import type { PlatformDemoData as DemoData } from '@/types/demodata';
+import { allPlatforms } from '@/types/demodata';
 
 const columnHelper = createColumnHelper<DemoData>();
 
@@ -51,7 +46,6 @@ export default function PlatformDemos() {
   // const [data, setData] = useState<DemoData[]>([]);
   const [loading, setLoading] = useState(true);
   const [selectedPlatforms, setSelectedPlatforms] = useState<string[]>([]);
-  const allPlatforms = ['MifosX', 'PHEE', 'Vnext'];
 
   useEffect(() => {
     setLoading(true);

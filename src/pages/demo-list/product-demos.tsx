@@ -22,18 +22,12 @@ import { useNavigate } from 'react-router-dom';
 import slugify from 'slugify';
 // import { fetchDemoListData } from '@/lib/api/fetchDemoListData';
 import { DemoSampleData } from '@/data/DemoTableSampleData';
-
-interface DemoData {
-  demoID: string;
-  demoName: string;
-  demoDescription: string;
-}
+import type {
+  ProductDemoData as DemoData,
+  ProductDemosProps,
+} from '@/types/demodata';
 
 const columnHelper = createColumnHelper<DemoData>();
-
-type ProductDemosProps = {
-  product: 'mifosx' | 'phee' | 'vnext';
-};
 
 export default function ProductDemos({ product }: ProductDemosProps) {
   const navigate = useNavigate();
