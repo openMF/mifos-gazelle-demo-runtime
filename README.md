@@ -38,7 +38,7 @@ Make sure you have the following software installed on your system:
     Open your terminal and run the following command to clone the project:
 
     ```sh
-    git clone [https://github.com/openMF/mifos-gazelle-demo-runtime.git](https://github.com/openMF/mifos-gazelle-demo-runtime.git)
+    git clone https://github.com/openMF/mifos-gazelle-demo-runtime.git
     ```
 
 2.  **Navigate to the project directory:**
