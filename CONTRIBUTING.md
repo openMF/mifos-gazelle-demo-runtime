@@ -4,12 +4,11 @@ First off, thank you for considering contributing to the Mifos Gazelle Demo Runt
 
 Following these guidelines helps to communicate that you respect the time of the developers managing and developing this open-source project. In return, they should reciprocate that respect in addressing your issue, assessing changes, and helping you finalize your pull requests.
 
-
 ## How Can I Contribute?
 
 ### Reporting Bugs
 
-This is one of the most helpful ways to contribute. If you find a bug, please ensure the bug was not already reported by searching on jira under [gax-27]([https://github.com/openMF/mifos-gazelle-demo-runtime/issues](https://mifosforge.jira.com/browse/GAZ-27)).
+This is one of the most helpful ways to contribute. If you find a bug, please ensure the bug was not already reported by searching on jira under [gax-27](<[https://github.com/openMF/mifos-gazelle-demo-runtime/issues](https://mifosforge.jira.com/browse/GAZ-27)>).
 
 If you're unable to find an open issue addressing the problem, [open a new ticket](https://mifosforge.jira.com/browse/GAZ-27). Be sure to include a **title and clear description**, as much relevant information as possible, and a **code sample or an executable test case** demonstrating the expected behavior that is not occurring.
 
@@ -23,7 +22,6 @@ When creating an enhancement suggestion, please:
 - **Provide a step-by-step description of the suggested enhancement** in as many details as possible.
 - **Explain why this enhancement would be useful** to most users.
 
-
 ### Pull Requests
 
 The process described here has several goals:
@@ -32,7 +30,6 @@ The process described here has several goals:
 - Fix problems that are important to users
 - Engage the community in working toward the best possible solution
 - Enable a sustainable system for maintainers to review contributions
-
 
 ## Development Workflow
 
