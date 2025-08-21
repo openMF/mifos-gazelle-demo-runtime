@@ -1,7 +1,8 @@
-export interface ProductDemoData {
-  demoID: string;
-  demoName: string;
-  demoDescription: string;
+export interface DemoData {
+  demoId: string;
+  name: string;
+  description: string;
+  tags: string[];
 }
 
 export type ProductDemosProps = {
@@ -9,10 +10,10 @@ export type ProductDemosProps = {
 };
 
 export interface PlatformDemoData {
-  demoID: string;
-  demoName: string;
-  demoDescription: string;
-  platforms: string[];
+  demoId: string;
+  name: string;
+  description: string;
+  tags: string[];
 }
 
 export const allPlatforms = ['MifosX', 'PHEE', 'Vnext'];

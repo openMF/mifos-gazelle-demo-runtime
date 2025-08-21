@@ -30,9 +30,9 @@ import {
   DropdownMenuCheckboxItem,
 } from '@/components/ui/dropdown-menu';
 // import { fetchDemoListData } from '@/lib/api/fetchDemoListData';
-import { SamplePlatformDemoData } from '@/data/sample-platform-demos';
 import type { PlatformDemoData as DemoData } from '@/types/demodata';
 import { allPlatforms } from '@/types/demodata';
+import { useDemosList } from '@/context/DemosListContext';
 
 const columnHelper = createColumnHelper<DemoData>();
 
@@ -43,36 +43,51 @@ export default function PlatformDemos() {
     navigate(`/demo/${id}/${demoSlug}`);
   };
   const [globalFilter, setGlobalFilter] = useState('');
-  // const [data, setData] = useState<DemoData[]>([]);
-  const [loading, setLoading] = useState(true);
+  const [data, setData] = useState<DemoData[]>([]);
+  const [loading, setLoading] = useState(false);
   const [selectedPlatforms, setSelectedPlatforms] = useState<string[]>([]);
-
+  const demosList = useDemosList();
+  const productdemodata = useMemo(() => {
+    return demosList.filter((demo: DemoData) => {
+      return demo.tags.length > 1;
+    });
+  }, [demosList]);
   useEffect(() => {
     setLoading(true);
-    // setData(SamplePlatformDemoData);
+    setData(productdemodata);
     setLoading(false);
-    // fetchDemoListData()
-    //   .then(setData)
-    //   .finally(() => setLoading(false));
-  }, []);
+  }, [demosList, productdemodata]);
+
+  // useEffect(() => {
+  //   setLoading(true);
+  //   // setData(SamplePlatformDemoData);
+  //   setLoading(false);
+  //   // fetchDemoListData()
+  //   //   .then(setData)
+  //   //   .finally(() => setLoading(false));
+  // }, []);
 
   const filteredData = useMemo(() => {
-    return SamplePlatformDemoData.filter(demo => {
-      const matchesSearch =
-        demo.demoName.toLowerCase().includes(globalFilter.toLowerCase()) ||
-        demo.demoDescription.toLowerCase().includes(globalFilter.toLowerCase());
+    const search = globalFilter.toLowerCase();
+
+    return data.filter(demo => {
+      const name = demo.name?.toLowerCase() ?? '';
+      const desc = demo.description?.toLowerCase() ?? '';
+      const tags = demo.tags?.map(t => t.toLowerCase()) ?? [];
+
+      const matchesSearch = name.includes(search) || desc.includes(search);
 
       const matchesPlatforms =
         selectedPlatforms.length === 0 ||
-        selectedPlatforms.every(p => demo.platforms.includes(p));
+        selectedPlatforms.some(p => tags.includes(p.toLowerCase()));
 
       return matchesSearch && matchesPlatforms;
     });
-  }, [globalFilter, selectedPlatforms]);
+  }, [globalFilter, selectedPlatforms, data]);
 
   const columns = useMemo(
     () => [
-      columnHelper.accessor('demoName', {
+      columnHelper.accessor('name', {
         header: 'Demo Name',
         enableGlobalFilter: true,
         cell: info => (
@@ -81,7 +96,7 @@ export default function PlatformDemos() {
           </div>
         ),
       }),
-      columnHelper.accessor('demoDescription', {
+      columnHelper.accessor('description', {
         header: 'Description',
         enableGlobalFilter: true,
         cell: info => (
@@ -90,7 +105,7 @@ export default function PlatformDemos() {
           </div>
         ),
       }),
-      columnHelper.accessor('platforms', {
+      columnHelper.accessor('tags', {
         header: 'Deployments needed',
         enableGlobalFilter: false,
         cell: info => (
@@ -108,8 +123,8 @@ export default function PlatformDemos() {
         id: 'action',
         header: 'Action',
         cell: (info: CellContext<DemoData, unknown>) => {
-          const demoName = info.row.original.demoName;
-          const id = info.row.original.demoID;
+          const demoName = info.row.original.name;
+          const id = info.row.original.demoId;
           return (
             <Button
               onClick={() => NavigateToDemo(id, demoName)}
@@ -124,7 +139,7 @@ export default function PlatformDemos() {
         },
       },
     ],
-    []
+    [NavigateToDemo]
   );
 
   const table = useReactTable({
