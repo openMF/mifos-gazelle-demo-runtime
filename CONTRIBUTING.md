@@ -4,17 +4,14 @@ First off, thank you for considering contributing to the Mifos Gazelle Demo Runt
 
 Following these guidelines helps to communicate that you respect the time of the developers managing and developing this open-source project. In return, they should reciprocate that respect in addressing your issue, assessing changes, and helping you finalize your pull requests.
 
-## Code of Conduct
-
-We have a [Code of Conduct](CODE_OF_CONDUCT.md) that we expect all contributors to adhere to. Please take a moment to read it before participating.
 
 ## How Can I Contribute?
 
 ### Reporting Bugs
 
-This is one of the most helpful ways to contribute. If you find a bug, please ensure the bug was not already reported by searching on GitHub under [Issues](https://github.com/openMF/mifos-gazelle-demo-runtime/issues).
+This is one of the most helpful ways to contribute. If you find a bug, please ensure the bug was not already reported by searching on jira under [gax-27]([https://github.com/openMF/mifos-gazelle-demo-runtime/issues](https://mifosforge.jira.com/browse/GAZ-27)).
 
-If you're unable to find an open issue addressing the problem, [open a new one](https://github.com/openMF/mifos-gazelle-demo-runtime/issues/new). Be sure to include a **title and clear description**, as much relevant information as possible, and a **code sample or an executable test case** demonstrating the expected behavior that is not occurring.
+If you're unable to find an open issue addressing the problem, [open a new ticket](https://mifosforge.jira.com/browse/GAZ-27). Be sure to include a **title and clear description**, as much relevant information as possible, and a **code sample or an executable test case** demonstrating the expected behavior that is not occurring.
 
 ### Suggesting Enhancements
 
@@ -26,12 +23,6 @@ When creating an enhancement suggestion, please:
 - **Provide a step-by-step description of the suggested enhancement** in as many details as possible.
 - **Explain why this enhancement would be useful** to most users.
 
-### Your First Code Contribution
-
-Unsure where to begin contributing? You can start by looking through `good first issue` and `help wanted` issues:
-
-- **Good first issues** - issues which should only require a few lines of code, and a test or two.
-- **Help wanted** - issues which should be a bit more involved than `good first issues`.
 
 ### Pull Requests
 
@@ -42,14 +33,6 @@ The process described here has several goals:
 - Engage the community in working toward the best possible solution
 - Enable a sustainable system for maintainers to review contributions
 
-Please follow these steps to have your contribution considered by the maintainers:
-
-1.  **Fork the repository** and create your branch from `main`.
-2.  If you've added code that should be tested, **add tests**.
-3.  If you've changed APIs, **update the documentation**.
-4.  Ensure the test suite passes.
-5.  Make sure your code lints.
-6.  Issue that pull request!
 
 ## Development Workflow
 
