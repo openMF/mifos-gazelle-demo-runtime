@@ -89,4 +89,4 @@ Please see the `CONTRIBUTING.md` file for details on our code of conduct, and th
 
 ## License
 
-This project is licensed under the Apache 2.0 License - see the [LICENSE](https://www.google.com/search?q=LICENSE) file for details.
+This project is licensed under the Mozilla Public License Version 2.0
