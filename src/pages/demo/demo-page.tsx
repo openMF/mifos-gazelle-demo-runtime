@@ -7,21 +7,21 @@ import {
   CheckCircle2,
   Sparkles,
 } from 'lucide-react';
-// import { useLocation } from 'react-router-dom';
-// import { fetchDemoData } from '@/lib/api/fetchDemoData';
-import { SamplePlatformDemo } from '@/data/platform-demo';
+import { useLocation } from 'react-router-dom';
+import { fetchDemoData } from '@/lib/api/fetchDemoData';
+// import { SamplePlatformDemo } from '@/data/platform-demo';
 import { Button } from '@/components/ui/button';
 import { getUniqueBaseUrls } from '@/lib/demofileparser/getBaseUrl';
 import { mapUrl } from '@/types/demodata';
 
 interface Step {
   title: string;
-  description: string;
+  details: string;
   url?: string;
 }
 
 interface Demo {
-  demoID: string;
+  demoId: string;
   demoName: string;
   demoDescription: string;
   steps: Step[];
@@ -31,38 +31,45 @@ export const DemoPage = () => {
   const [demoData, setDemoData] = useState<Demo | null>(null);
   const [isLoading, setIsLoading] = useState(true);
   const [activeBaseUrl, setActiveBaseUrl] = useState<string>('');
-  const firstStepUrl = SamplePlatformDemo?.steps[0].url;
+  const firstStepUrl = demoData?.steps[0].url;
   const [currentStep, setCurrentStep] = useState(0);
   const [iframeUrl, setIframeUrl] = useState('');
   const [isAutoPlay, setIsAutoPlay] = useState(false);
   const [isTransitioning, setIsTransitioning] = useState(false);
-  const [baseUrls, setBaseUrls] = useState<Map<string, string>>(
-    firstStepUrl
-      ? new Map([[firstStepUrl, firstStepUrl]])
-      : new Map([
-          [
-            SamplePlatformDemo?.steps[0].url || '',
-            SamplePlatformDemo?.steps[0].url || '',
-          ],
-        ])
-  );
 
-  // const location = useLocation();
+  const location = useLocation();
 
   useEffect(() => {
-    // const demoTitle = location.pathname.split('/')[2];
-    // fetchDemoData()
-    //   .then(setDemoData)
-    //   .finally(() => setIsLoading(false));
-    setIsLoading(false);
-    setDemoData(SamplePlatformDemo);
-    setIframeUrl(SamplePlatformDemo?.steps[0].url ?? '');
-    const initialUrl = SamplePlatformDemo?.steps[0].url ?? '';
-    const parsedUrl = new URL(initialUrl);
-    handleStepTransition(0, parsedUrl.href);
-    const initialBaseUrl = `${parsedUrl.protocol}//${parsedUrl.hostname}`;
-    setActiveBaseUrl(initialBaseUrl);
-  }, []);
+    setIsLoading(true);
+    const demoTitle = location.pathname.split('/')[3];
+    fetchDemoData(demoTitle)
+      .then(demodatajson => {
+        const steps = Object.entries(demodatajson.steps)
+          .sort((a, b) => Number(a[0]) - Number(b[0]))
+          .map(([, stepValue]) => stepValue as Step);
+
+        const demoDataWithSteps = { ...demodatajson, steps };
+        setDemoData(demoDataWithSteps);
+
+        const firstStepUrl = steps[0]?.url;
+        if (firstStepUrl) {
+          setIframeUrl(firstStepUrl);
+          try {
+            const parsedUrl = new URL(firstStepUrl);
+            const initialBaseUrl = `${parsedUrl.protocol}//${parsedUrl.hostname}`;
+            setActiveBaseUrl(initialBaseUrl);
+            getUniqueBaseUrls(firstStepUrl, setBaseUrls);
+            handleStepTransition(0, firstStepUrl);
+          } catch (error) {
+            console.error('Invalid URL:', firstStepUrl, error);
+          }
+        }
+      })
+      .finally(() => setIsLoading(false));
+  }, [location.pathname]); // Add dependency array
+
+  // Also update the initial state for baseUrls to be empty initially:
+  const [baseUrls, setBaseUrls] = useState<Map<string, string>>(new Map());
 
   useEffect(() => {
     let interval: NodeJS.Timeout;
@@ -243,7 +250,7 @@ export const DemoPage = () => {
                     {currentStepData?.title}
                   </h3>
                   <p className="text-gray-700 dark:text-gray-300 leading-relaxed">
-                    {currentStepData?.description}
+                    {currentStepData?.details}
                   </p>
                   {currentStepData?.url && (
                     <a
@@ -345,7 +352,7 @@ export const DemoPage = () => {
                         {step.title}
                       </div>
                       <div className="text-xs text-gray-500 dark:text-gray-400 line-clamp-2 leading-relaxed">
-                        {step.description}
+                        {step.details}
                       </div>
                     </div>
                   </div>

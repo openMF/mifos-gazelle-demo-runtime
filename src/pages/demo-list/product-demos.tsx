@@ -20,12 +20,8 @@ import {
 } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import slugify from 'slugify';
-// import { fetchDemoListData } from '@/lib/api/fetchDemoListData';
-import { DemoSampleData } from '@/data/DemoTableSampleData';
-import type {
-  ProductDemoData as DemoData,
-  ProductDemosProps,
-} from '@/types/demodata';
+import type { DemoData, ProductDemosProps } from '@/types/demodata';
+import { useDemosList } from '@/context/DemosListContext';
 
 const columnHelper = createColumnHelper<DemoData>();
 
@@ -37,20 +33,24 @@ export default function ProductDemos({ product }: ProductDemosProps) {
   };
   const [globalFilter, setGlobalFilter] = useState('');
   const [data, setData] = useState<DemoData[]>([]);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
 
+  const demosList = useDemosList();
   useEffect(() => {
     setLoading(true);
-    setData(DemoSampleData);
+    const filteredData = demosList.filter((demo: DemoData) => {
+      return (
+        demo.tags.length === 1 &&
+        demo.tags[0].toLowerCase() === product.toLowerCase()
+      );
+    });
+    setData(filteredData);
     setLoading(false);
-    // fetchDemoListData()
-    //   .then(setData)
-    //   .finally(() => setLoading(false));
-  }, []);
+  }, [demosList, product]);
 
   const columns = useMemo(
     () => [
-      columnHelper.accessor('demoName', {
+      columnHelper.accessor('name', {
         header: 'Demo Name',
         enableGlobalFilter: true,
         cell: info => (
@@ -59,7 +59,7 @@ export default function ProductDemos({ product }: ProductDemosProps) {
           </div>
         ),
       }),
-      columnHelper.accessor('demoDescription', {
+      columnHelper.accessor('description', {
         header: 'Description',
         enableGlobalFilter: true,
         cell: info => (
@@ -72,8 +72,8 @@ export default function ProductDemos({ product }: ProductDemosProps) {
         id: 'action',
         header: 'Action',
         cell: (info: CellContext<DemoData, unknown>) => {
-          const demoName = info.row.original.demoName;
-          const id = info.row.original.demoID;
+          const demoName = info.row.original.name;
+          const id = info.row.original.demoId;
           return (
             <Button
               onClick={() => NavigateToDemo(id, demoName)}
