@@ -155,3 +155,7 @@
 .dark .think-blue-scrollbar {
   --scrollbar-thumb-hover: #93c5fd;
 }
+
+html {
+  scroll-behavior: smooth;
+}
