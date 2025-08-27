@@ -7,7 +7,7 @@ import {
   useReactTable,
   type CellContext,
 } from '@tanstack/react-table';
-import { useMemo, useState, useEffect } from 'react';
+import { useMemo, useState, useEffect, useCallback } from 'react';
 import { Button } from '@/components/ui/button';
 import { Skeleton } from '@/components/ui/skeleton';
 import {
@@ -38,15 +38,18 @@ const columnHelper = createColumnHelper<DemoData>();
 
 export default function PlatformDemos() {
   const navigate = useNavigate();
-  const NavigateToDemo = (id: string, demoName: string) => {
-    const demoSlug = slugify(demoName, { lower: true });
-    navigate(`/demo/${id}/${demoSlug}`);
-  };
   const [globalFilter, setGlobalFilter] = useState('');
   const [data, setData] = useState<DemoData[]>([]);
   const [loading, setLoading] = useState(false);
   const [selectedPlatforms, setSelectedPlatforms] = useState<string[]>([]);
   const demosList = useDemosList();
+  const NavigateToDemo = useCallback(
+    (id: string, demoName: string) => {
+      const demoSlug = slugify(demoName, { lower: true, replacement: '_' });
+      navigate(`/demo/${id}/${demoSlug}`);
+    },
+    [navigate]
+  );
   const productdemodata = useMemo(() => {
     return demosList.filter((demo: DemoData) => {
       return demo.tags.length > 1;

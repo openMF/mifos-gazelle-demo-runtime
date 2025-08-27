@@ -28,7 +28,7 @@ const columnHelper = createColumnHelper<DemoData>();
 export default function ProductDemos({ product }: ProductDemosProps) {
   const navigate = useNavigate();
   const NavigateToDemo = (id: string, demoName: string) => {
-    const demoSlug = slugify(demoName, { lower: true });
+    const demoSlug = slugify(demoName, { lower: true, replacement: '_' });
     navigate(`/demo/${id}/${demoSlug}`);
   };
   const [globalFilter, setGlobalFilter] = useState('');

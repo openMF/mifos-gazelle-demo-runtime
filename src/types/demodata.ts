@@ -20,6 +20,6 @@ export const allPlatforms = ['MifosX', 'PHEE', 'Vnext'];
 
 export const mapUrl = new Map<string, string>([
   ['http://mifos.mifos.gazelle.test', 'MifosX'],
-  ['https://ops.mifos.gazelle.test', 'PHEE'],
+  ['http://ops.mifos.gazelle.test', 'PHEE'],
   ['http://vnextadmin.mifos.gazelle.test', 'Vnext'],
 ]);

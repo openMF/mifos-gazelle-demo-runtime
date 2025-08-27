@@ -1,5 +1,6 @@
 import { ProductCard } from '@/components/Cards/product-card';
 import { platformDemos, products } from '@/data/productCardData';
+import ScrollVelocity from '@/components/motion/scroll-velocity';
 
 export const Home = () => {
   return (
@@ -10,10 +11,7 @@ export const Home = () => {
         <div className="max-w-7xl mx-auto">
           <div className="flex flex-col lg:flex-row items-center gap-16">
             <div className="flex-1 text-center lg:text-left">
-              <div
-                className="inline-flex items-center bg-blue-50 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300 
-                            px-4 py-2 rounded-full text-sm font-medium mb-8"
-              >
+              <div className="inline-flex items-center bg-blue-50 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300 px-4 py-2 rounded-full text-sm font-medium mb-8">
                 <span className="w-2 h-2 bg-blue-400 dark:bg-blue-500 rounded-full mr-2"></span>
                 Demo Platform
               </div>
@@ -42,10 +40,7 @@ export const Home = () => {
                     </svg>
                   </div>
                 </span>{' '}
-                <span
-                  className="bg-gradient-to-r from-blue-600 to-blue-500 dark:from-blue-400 dark:to-blue-300 
-                               bg-clip-text text-transparent"
-                >
+                <span className="bg-gradient-to-r from-blue-600 to-blue-500 dark:from-blue-400 dark:to-blue-300 bg-clip-text text-transparent">
                   Explorer
                 </span>
               </h1>
@@ -74,6 +69,16 @@ export const Home = () => {
               />
             </div>
           </div>
+        </div>
+      </section>
+      <section className="relative py-40 px-20">
+        <div className="max-w-screenxl mx-auto">
+          <ScrollVelocity
+            texts={['Mifos Gazelle', 'End To End Demos']}
+            velocity={100}
+            velocityMapping={{ input: [0, 1000], output: [0, 5] }}
+            className="text-7xl font-bold text-blue-400 tracking-tight"
+          />
         </div>
       </section>
 
