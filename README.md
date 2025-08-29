@@ -135,10 +135,14 @@ The application follows a modern React-based architecture with key components:
 ```
 mifos-gazelle-demo-runtime/
 ├── src/
-│   ├── components/     # React components
-│   ├── services/       # API and repository services
-│   ├── utils/          # Utility functions
-│   └── styles/         # CSS and styling files
+|   ├── assets/      # Static assets
+|   ├── components/  # React components
+|   ├── data/        # Data files
+|   ├── pages/       # React pages
+│   ├── routes/      # React routes
+|   ├── context/     # React context
+|   ├── lib/         # API calls and functions
+|   ├── types/       # Typescript types
 ├── public/             # Static assets
 └── package.json        # Project dependencies
 ```
