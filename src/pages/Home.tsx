@@ -1,11 +1,25 @@
 import { ProductCard } from '@/components/Cards/product-card';
 import { platformDemos, products } from '@/data/productCardData';
-import ScrollVelocity from '@/components/motion/scroll-velocity';
+// import ScrollVelocity from '@/components/motion/scroll-velocity';
+import Particles from '@/components/motion/particle-effect/particles';
 
 export const Home = () => {
   return (
     <div className="min-h-screen bg-white dark:bg-gray-900 relative overflow-hidden">
       <div className="absolute inset-0 bg-gradient-to-br from-gray-50 via-white to-gray-50 dark:from-gray-900 dark:via-gray-900 dark:to-gray-800"></div>
+      <div className="absolute inset-0 z-0 w-full h-full">
+        <Particles
+          particleColors={['#60a5fa', '#03fc88']}
+          particleCount={200}
+          particleSpread={10}
+          speed={0.1}
+          particleBaseSize={150}
+          moveParticlesOnHover={true}
+          alphaParticles={true}
+          disableRotation={false}
+          className="pointer-events-none w-full h-full"
+        />
+      </div>
 
       <section className="relative pt-24 pb-20 px-6">
         <div className="max-w-7xl mx-auto">
@@ -71,16 +85,16 @@ export const Home = () => {
           </div>
         </div>
       </section>
-      <section className="relative py-40 px-20">
+      {/* <section className="relative py-40 px-20">
         <div className="max-w-screenxl mx-auto">
           <ScrollVelocity
             texts={['Mifos Gazelle', 'End To End Demos']}
             velocity={100}
             velocityMapping={{ input: [0, 1000], output: [0, 5] }}
-            className="text-7xl font-bold text-blue-400 tracking-tight"
+            className="text-7xl font-bold dark:text-blue-400 text-slate-300 tracking-tight"
           />
         </div>
-      </section>
+      </section> */}
 
       <section id="demos" className="relative py-24 px-6">
         <div className="max-w-7xl mx-auto flex flex-col gap-24">
