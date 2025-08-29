@@ -11,7 +11,7 @@ export const TopNav = ({ title }: { title: string }) => {
       </div>
       <button
         onClick={toggleTheme}
-        className="text-white cursor-pointer"
+        className="text-white cursor-pointer cursor-target"
         title="Toggle theme"
       >
         {theme === 'light' ? <MoonIcon /> : <SunIcon />}
