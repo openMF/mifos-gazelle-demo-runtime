@@ -1,10 +1,7 @@
 {
   "demoName": "Batch Payments flow from PHEE - Mifos X",
   "demoDescription": "End-to-end batch payment flow from Payment Hub EE to Mifos X",
-  "tags": [
-    "MifosX",
-    "Phee"
-  ],
+  "tags": ["MifosX", "Phee"],
   "steps": {
     "1": {
       "title": "Login to Ops Web",
