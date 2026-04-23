@@ -41,7 +41,7 @@ export const DemoPage = () => {
 
   useEffect(() => {
     setIsLoading(true);
-    const demoTitle = location.pathname.split('/')[3];
+    const demoTitle = location.pathname.split('/')[2];
     fetchDemoData(demoTitle)
       .then(demodatajson => {
         const steps = Object.entries(demodatajson.steps)
