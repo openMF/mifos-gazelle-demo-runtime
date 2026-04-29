@@ -71,7 +71,7 @@ Ensure you have the following software installed:
    ```
 
 5. **View in browser:**
-   Open your web browser and navigate to `http://localhost:3000`
+   Open your web browser and navigate to `http://localhost:5173`
 
 ### How to Use
 
