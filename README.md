@@ -13,6 +13,12 @@ The Demo Runtime UI features a split-panel interface:
 
 This side-by-side layout makes it easy to follow complex workflows, as users can read instructions while performing actions in the live application simultaneously.
 
+## Demo
+
+🎥 [Watch Full Demo Video](https://drive.google.com/file/d/10WXR4D9Oxb3f_hvXF2CybZaCYl7aZUJf/view?usp=sharing)
+
+This video covers the complete end-to-end workflow — creating a demo in the TUI, publishing it with `just publish`, and viewing it live in Demo Runtime.
+
 ## Features
 
 - **Interactive Live Demos:** Engage directly with deployed DPGs in real-time
